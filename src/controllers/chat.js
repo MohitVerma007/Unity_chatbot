@@ -5,7 +5,7 @@ const primaryApiUrl = 'https://shauvik889-backend.hf.space/generate-response/';
 const fallbackApiUrl = 'https://shauvik889-chatbotapi.hf.space/generate-response/'; // Replace with your fallback API
 
 // Controller to hit the primary API and fallback if necessary
-const generateResponse = async (req, res) => {
+exports.generateResponse = async (req, res) => {
     const userId = req.body.user_id; // Assuming you're using middleware to set req.user
     const payload = {
         "message": req.body.message || "Test message", // Use the request body message or default one
@@ -104,6 +104,3 @@ const updateUserRequestCount = async (userId) => {
     }
 };
 
-module.exports = {
-    generateResponse
-};
