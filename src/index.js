@@ -34,10 +34,12 @@ app.use(passport.initialize())
 
 //import routes
 const authRoutes = require('./routes/auth')
+const chatRoutes = require('./routes/chat')
 
 
 //initialize routes
 app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/chat', chatRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
