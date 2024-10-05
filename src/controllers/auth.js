@@ -49,28 +49,19 @@ exports.register = async (req, res) => {
   }
 
 
-  // Set status based on role
-  const status = 'Pending';
-
   try {
     // Hash the password
     const hashedPassword = await hash(password, 10);
 
     // Insert user into the database
     const result = await db.query(
-      `INSERT INTO users (username, email, password_hash, phone, address, status)
+      `INSERT INTO users (username, email, password_hash, phone, address)
        VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
-      [username, email, hashedPassword, phone, address, role, status]
+      [username, email, hashedPassword, phone, address]
     );
 
     const userId = result.rows[0].id;
 
-    // Log the registration activity
-    await db.query(
-      `INSERT INTO activity_logs (user_id, action, details)
-       VALUES ($1, $2, $3)`,
-      [userId, 'User Registered', `Username: ${username}, Email: ${email}`]
-    );
 
     return res.status(201).json({
       success: true,
