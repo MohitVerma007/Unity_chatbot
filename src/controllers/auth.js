@@ -56,7 +56,7 @@ exports.register = async (req, res) => {
     // Insert user into the database
     const result = await db.query(
       `INSERT INTO users (username, email, password_hash, phone, address)
-       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
+       VALUES ($1, $2, $3, $4, $5) RETURNING id`,
       [username, email, hashedPassword, phone, address]
     );
 
