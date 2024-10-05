@@ -9,7 +9,7 @@ const path = require('path');
 // All Users
 exports.getUsers = async (req, res) => {
   try {
-    const { rows } = await db.query('select id, username, email, phone, address, status from users')
+    const { rows } = await db.query('select id, username, email, phone, address, status, daily_request_count, total_request_count from users')
 
     return res.status(200).json({
       success: true,
@@ -26,7 +26,7 @@ exports.getUserById = async (req, res) => {
   console.log(req.params, userId)
 
   try {
-    const { rows } = await db.query('select id, username, email, phone, address, status from users where id = $1', [userId])
+    const { rows } = await db.query('select id, username, email, phone, address, status, daily_request_count, total_request_count from users where id = $1', [userId])
 
     return res.status(200).json({
       success: true,
